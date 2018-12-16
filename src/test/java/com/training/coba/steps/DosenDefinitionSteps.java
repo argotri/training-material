@@ -1,5 +1,6 @@
 package com.training.coba.steps;
 
+import com.training.coba.model.SingleDosenResponse;
 import com.training.coba.steps.api.DosenApi;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -17,6 +18,8 @@ public class DosenDefinitionSteps {
     DosenApi dosenApi;
     Response response;
     Integer idDosen;
+
+    SingleDosenResponse singleDosenResponse;
 
 
     @Given("^user preparing the data$")
@@ -56,11 +59,13 @@ public class DosenDefinitionSteps {
     @When("^user hit API to get one Dosen$")
     public void userHitAPIToGetDosen() {
         response = dosenApi.getSingleDosen(idDosen);
+        singleDosenResponse = response.as(SingleDosenResponse.class);
     }
 
     @Given("^user preparing data for delete$")
     public void userPreparingDataForDelete() throws Throwable {
-        idDosen = response.path("content.id");
+//        idDosen = response.path("content.id");
+        idDosen = singleDosenResponse.getContent().getId();
     }
 
     @When("^user hit API to delete dosen$")

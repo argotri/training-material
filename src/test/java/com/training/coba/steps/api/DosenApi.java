@@ -1,4 +1,5 @@
 package com.training.coba.steps.api;
+import com.training.coba.model.DosenModel;
 import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
@@ -19,11 +20,18 @@ public class DosenApi extends ScenarioSteps{
 
     @Step
     public Response addDosen(){
-        String body = "{\n" +
-                "\t\"nama\":\"Argo Triwidodo\",\n" +
-                "\t\"matkul\":\"matematika\",\n" +
-                "\t\"no_hp\":\"0858527737752\"\n" +
-                "}";
+//        String body = "{\n" +
+//                "\t\"nama\":\"Argo Triwidodo\",\n" +
+//                "\t\"matkul\":\"matematika\",\n" +
+//                "\t\"no_hp\":\"0858527737752\"\n" +
+//                "}";
+
+        DosenModel body = new DosenModel();
+
+        body.setNama("Argo triwidodo");
+        body.setNoHp("085852773775");
+        body.setMatkul("Matematika");
+
         return given()
                 .header("Content-Type","application/json")
                 .log()
